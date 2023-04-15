@@ -4,17 +4,23 @@ import { BsSendFill } from 'react-icons/bs';
 import { ImSpinner9 } from 'react-icons/im';
 import { Input } from '../Input';
 import axios from 'axios';
-import { mutate } from 'swr';
 
-export const PostForm = () => {
+interface IProps {
+  fn: Function;
+}
+
+export const PostForm: React.FC<IProps> = ({ fn }) => {
   const methods = useForm();
 
   const onSubmit = methods.handleSubmit(async (data) => {
     const url = '/postify/api/v1/posts';
     try {
       setIsLoading(true);
-      await axios.post(url, { title: data.post });
-      mutate('/postify/api/v1/posts');
+      // first post the data, then run the prop function
+      // so the mutateKey will be changed and data will be revalidated in Posts FC
+      await axios.post(url, { title: data.post }).then(() => {
+        fn();
+      });
     } catch (e) {
       console.error(e);
       alert('failed :(');
@@ -54,7 +60,7 @@ export const PostForm = () => {
           <button
             onClick={onSubmit}
             disabled={isLoading}
-            className="hover:bg-green-700 p-4 border-gray-300 bg-green-600 text-green-100 border rounded-md"
+            className="p-4 text-green-100 bg-green-600 border border-gray-300 rounded-md hover:bg-green-700"
           >
             {!isLoading ? (
               <BsSendFill className="text-xl" />
