@@ -28,7 +28,8 @@ export const Posts = () => {
 
   const { data, error, isLoading, size, setSize } = useSWRInfinite(
     getKey,
-    fetcher
+    fetcher,
+    { refreshInterval: 1000 }
   );
 
   const isReachedEnd = data && data[data?.length - 1].results?.length < 7;
