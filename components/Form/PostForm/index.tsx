@@ -1,24 +1,20 @@
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BsSendFill } from 'react-icons/bs';
 import { ImSpinner9 } from 'react-icons/im';
 import { Input } from '../Input';
 import axios from 'axios';
-import React, { FC } from 'react';
+import { mutate } from 'swr';
 
-interface PostFormProps {
-  handleNewPost: (newPost: any) => void;
-}
-
-export const PostForm = ({ onNewPost }: any) => {
+export const PostForm = () => {
   const methods = useForm();
 
   const onSubmit = methods.handleSubmit(async (data) => {
-    const url =
-      process.env.NEXT_PUBLIC_BACKEND_API_URL + '/postify/api/v1/posts';
+    const url = '/postify/api/v1/posts';
     try {
       setIsLoading(true);
-      const response = await axios.post(url, { title: data.post });
-      onNewPost(response);
+      await axios.post(url, { title: data.post });
+      mutate('/postify/api/v1/posts');
     } catch (e) {
       console.error(e);
       alert('failed :(');

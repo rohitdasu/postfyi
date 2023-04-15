@@ -14,6 +14,7 @@ const Home: NextPage = () => {
         <Topbar />
         <div className="max-w-xl mx-auto flex-1 w-full">
           <div className="py-4 md:py-8 px-4 lg:px-0">
+            <PostForm />
             <Posts />
           </div>
         </div>
