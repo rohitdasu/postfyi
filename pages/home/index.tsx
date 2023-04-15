@@ -1,17 +1,21 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import type { NextPage } from 'next';
+import { PostForm, Topbar } from '@/components';
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <Head>
-        <title>Title</title>
+        <title>Home | PostFYI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to <span className="text-blue-600">Next.js 13</span>
-        </h1>
+      <main className="flex w-full flex-1 flex-col bg-gradient-to-br from-gray-100 to-gray-200">
+        <Topbar />
+        <div className="max-w-xl mx-auto flex-1 w-full">
+          <div className="py-4 px-4 lg:px-0">
+            <PostForm />
+          </div>
+        </div>
       </main>
     </div>
   );
