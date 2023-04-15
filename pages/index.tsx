@@ -25,7 +25,7 @@ const Home: NextPage = () => {
               Be heard without the fear of judgment
             </p>
             <div className="w-full text-center">
-              <Link href={'/posts'}>
+              <Link href="/posts">
                 <button className="text-green-100 uppercase font-medium hover:bg-green-700 bg-green-600 transition-all hover:shadow-md h-10 w-36 md:w-48 md:h-12  rounded-md text-base md:text-lg focus-visible:outline-none">
                   get started
                 </button>
