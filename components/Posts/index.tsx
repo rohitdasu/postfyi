@@ -6,6 +6,9 @@ import axios from 'axios';
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 export const Posts = () => {
+  if (process.env.BACKEND_API_URL) {
+    console.log('api url is present');
+  }
   const url = process.env.BACKEND_API_URL + '/postify/api/v1/posts';
   const { data, error, isLoading } = useSWR(url, fetcher);
 
