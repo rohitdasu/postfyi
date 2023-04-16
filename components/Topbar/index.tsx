@@ -11,12 +11,12 @@ export const Topbar = () => {
             POST<span className="text-green-600">FYI</span>
           </p>
         </Link>
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-center gap-4 md:gap-6">
           <a href="https://github.com/rohitdasu/postfyi" target="_blank">
-            <SiGithub className="text-3xl" />
+            <SiGithub className="text-3xl hover:opacity-70" />
           </a>
           <a href="https://twitter.com/rohit_dasu_" target="_blank">
-            <SiTwitter className="text-3xl" />
+            <SiTwitter className="text-3xl hover:opacity-70" />
           </a>
         </div>
       </nav>

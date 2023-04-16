@@ -55,7 +55,7 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
 
   const LoadMore = () => {
     return (
-      <div className="float-right py-4">
+      <div>
         <button
           onClick={() => setSize(size + 1)}
           className="flex flex-row items-center gap-2 text-base font-medium text-green-600"
@@ -68,7 +68,7 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
 
   const LoadingMore = () => {
     return (
-      <div className="float-left py-4">
+      <div>
         <FiLoader className="text-2xl animate-spin text-green-600" />
       </div>
     );
@@ -85,9 +85,14 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
               ))}
             </React.Fragment>
           ))}
-        {loadingMore && <LoadingMore />}
-        {!isReachedEnd && data && <LoadMore />}
-        {isLoading && <Loading />}
+        <div className="flex flex-row items-center justify-between py-4">
+          <div />
+          {loadingMore && <LoadingMore />}
+          {!isReachedEnd && data && <LoadMore />}
+        </div>
+        <div className="flex items-center justify-center">
+          {isLoading && <Loading />}
+        </div>
         {error && <Error />}
       </div>
     </>
