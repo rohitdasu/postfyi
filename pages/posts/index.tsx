@@ -4,7 +4,7 @@ import { PostForm, Topbar } from '@/components';
 import { Posts } from '@/components/Posts';
 import { useState } from 'react';
 
-const Home: NextPage = () => {
+const Post: NextPage = () => {
   // change the state whenever a post request happens
   const [mutateKey, setMutateKey] = useState<number | null>(Math.random());
 
@@ -27,4 +27,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Post;

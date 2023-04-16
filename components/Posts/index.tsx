@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
-import { MdOutlineUnfoldMoreDouble } from 'react-icons/md';
+import { MdOutlineUnfoldMore } from 'react-icons/md';
 import { Post } from './Post';
-import { useSWRConfig } from 'swr';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -58,7 +57,7 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
           onClick={() => setSize(size + 1)}
           className="flex flex-row items-center gap-2 text-base font-medium text-green-600"
         >
-          <p>Load more</p> <MdOutlineUnfoldMoreDouble />
+          <p>Load more</p> <MdOutlineUnfoldMore className="text-xl" />
         </button>
       </div>
     );
