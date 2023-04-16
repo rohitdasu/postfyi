@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
 import { MdOutlineUnfoldMore } from 'react-icons/md';
+import { FiLoader } from 'react-icons/fi';
 import { Post } from './Post';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -42,8 +43,10 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
 
   const isReachedEnd = data && data[data?.length - 1].results?.length < 7;
 
+  const loadingMore = data && typeof data[size - 1] === 'undefined';
+
   const Loading = () => {
-    return <p>Loading...</p>;
+    return <FiLoader className="text-2xl animate-spin text-green-600" />;
   };
 
   const Error = () => {
@@ -63,6 +66,14 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
     );
   };
 
+  const LoadingMore = () => {
+    return (
+      <div className="float-left py-4">
+        <FiLoader className="text-2xl animate-spin text-green-600" />
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="py-4 md:py-8">
@@ -74,9 +85,8 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
               ))}
             </React.Fragment>
           ))}
-        {data?.length && data[0]?.results?.length && !isReachedEnd && (
-          <LoadMore />
-        )}
+        {loadingMore && <LoadingMore />}
+        {!isReachedEnd && data && <LoadMore />}
         {isLoading && <Loading />}
         {error && <Error />}
       </div>
