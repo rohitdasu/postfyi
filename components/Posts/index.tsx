@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
 import { MdOutlineUnfoldMoreDouble } from 'react-icons/md';
 import { Post } from './Post';
+import { useSWRConfig } from 'swr';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-export const Posts = () => {
+interface IProps {
+  mutateKey: number | null;
+}
+
+export const Posts: React.FC<IProps> = ({ mutateKey }) => {
   const getKey = (pageIndex: number, previousPageData: any) => {
     let cursorId = '';
 
@@ -26,11 +31,15 @@ export const Posts = () => {
     }
   };
 
-  const { data, error, isLoading, size, setSize } = useSWRInfinite(
+  const { data, error, isLoading, size, setSize, mutate } = useSWRInfinite(
     getKey,
-    fetcher,
-    { refreshInterval: 1000 }
+    fetcher
   );
+
+  // mutate whenever the mutateKey is changed
+  useEffect(() => {
+    mutate();
+  }, [mutateKey]);
 
   const isReachedEnd = data && data[data?.length - 1].results?.length < 7;
 
@@ -44,10 +53,10 @@ export const Posts = () => {
 
   const LoadMore = () => {
     return (
-      <div className="py-4 float-right">
+      <div className="float-right py-4">
         <button
           onClick={() => setSize(size + 1)}
-          className="text-green-600 flex flex-row items-center gap-2 text-base font-medium"
+          className="flex flex-row items-center gap-2 text-base font-medium text-green-600"
         >
           <p>Load more</p> <MdOutlineUnfoldMoreDouble />
         </button>

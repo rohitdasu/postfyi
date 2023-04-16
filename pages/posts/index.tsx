@@ -2,20 +2,24 @@ import Head from 'next/head';
 import type { NextPage } from 'next';
 import { PostForm, Topbar } from '@/components';
 import { Posts } from '@/components/Posts';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
+  // change the state whenever a post request happens
+  const [mutateKey, setMutateKey] = useState<number | null>(Math.random());
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
         <title>Posts | PostFYI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex w-full flex-1 flex-col bg-gradient-to-br from-gray-100 to-gray-200">
+      <main className="flex flex-col flex-1 w-full bg-gradient-to-br from-gray-100 to-gray-200">
         <Topbar />
-        <div className="max-w-xl mx-auto flex-1 w-full">
-          <div className="py-4 md:py-8 px-4 lg:px-0">
-            <PostForm />
-            <Posts />
+        <div className="flex-1 w-full max-w-xl mx-auto">
+          <div className="px-4 py-4 md:py-8 lg:px-0">
+            <PostForm fn={() => setMutateKey(Math.random())} />
+            <Posts mutateKey={mutateKey} />
           </div>
         </div>
       </main>
