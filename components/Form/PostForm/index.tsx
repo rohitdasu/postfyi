@@ -34,7 +34,7 @@ export const PostForm: React.FC<IProps> = ({ fn }) => {
     name: 'post',
     type: 'text',
     id: 'post',
-    placeholder: 'enter an anonymous post',
+    placeholder: 'Share anonymous post',
     validation: {
       required: {
         value: true,

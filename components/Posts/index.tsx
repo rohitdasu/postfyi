@@ -85,10 +85,11 @@ export const Posts: React.FC<IProps> = ({ mutateKey }) => {
               ))}
             </React.Fragment>
           ))}
-        <div className="flex flex-row items-center justify-between py-4">
-          <div />
-          {loadingMore && <LoadingMore />}
+        <div className="flex flex-row justify-end py-4">
           {!isReachedEnd && data && <LoadMore />}
+        </div>
+        <div className="flex flex-row justify-center">
+          {loadingMore && <LoadingMore />}
         </div>
         <div className="flex items-center justify-center">
           {isLoading && <Loading />}

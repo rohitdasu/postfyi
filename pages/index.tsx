@@ -1,38 +1,26 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
-import { Topbar } from '@/components';
+import type { NextPage } from 'next';
+import { PostForm, Topbar } from '@/components';
+import { Posts } from '@/components/Posts';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
+  // change the state whenever a post request happens
+  const [mutateKey, setMutateKey] = useState<number | null>(Math.random());
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
-        <title>PostFYI</title>
+        <title>PostFYI | Anonymous posts</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex w-full flex-1 flex-col bg-gradient-to-br from-gray-100 to-gray-200">
+      <main className="flex flex-col flex-1 w-full bg-gradient-to-br from-gray-100 to-gray-200">
         <Topbar />
-        <div className="max-w-7xl mx-auto w-full h-full flex-1 flex flex-col items-center justify-center px-4 lg:px-0">
-          <div className="flex flex-col gap-12">
-            <p className="text-center w-full lg:w-3/4 mx-auto text-xl md:text-2xl lg:text-4xl font-inter font-medium text-gray-900 !leading-[1.1]">
-              Unleash your inner thoughts with our{' '}
-              <span className="text-green-600 font-semibold">secure</span> and{' '}
-              <span className="text-green-600 font-semibold">anonymous</span>{' '}
-              status posting app
-            </p>
-            <p className="text-center mx-auto text-lg md:text-xl lg:text-2xl font-inter font-medium text-gray-600">
-              Be heard without the fear of judgment
-            </p>
-            <div className="w-full text-center">
-              <Link href="/posts">
-                <button className="text-green-100 uppercase font-medium hover:bg-green-700 bg-green-600 transition-all hover:shadow-md h-10 w-36 md:w-48 md:h-12  rounded-md text-base focus-visible:outline-none">
-                  get started
-                </button>
-              </Link>
-            </div>
+        <div className="flex-1 w-full max-w-xl mx-auto">
+          <div className="px-4 py-4 md:py-8 lg:px-0">
+            <PostForm fn={() => setMutateKey(Math.random())} />
+            <Posts mutateKey={mutateKey} />
           </div>
-          <div />
         </div>
       </main>
     </div>
